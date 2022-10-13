@@ -160,7 +160,7 @@ class SimplexBackend(Backend):
 
     @property
     def backend_info(self) -> Optional[BackendInfo]:
-        return self._backend_info
+        return None
 
     @property
     def required_predicates(self) -> List[Predicate]:

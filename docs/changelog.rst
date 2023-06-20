@@ -1,6 +1,12 @@
 Changelog
 ~~~~~~~~~
 
+0.8.0 (unreleased)
+------------------
+
+* Updated pytket version requirement to 1.16.
+* Drop support for Python 3.8
+
 0.7.0 (November 2022)
 ---------------------
 

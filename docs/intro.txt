@@ -7,7 +7,7 @@ for large sparse circuits.
 ``pytket-pysimplex`` is an extension to ``pytket`` that allows ``pytket``
 circuits to be simulated using ``pysimplex``.
 
-``pytket-pysimplex`` is available for Python 3.8, 3.9 and 3.10, on Linux, MacOS
+``pytket-pysimplex`` is available for Python 3.9 and 3.10, on Linux, MacOS
 and Windows. To install, run:
 
 ::

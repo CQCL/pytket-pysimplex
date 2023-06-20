@@ -30,7 +30,7 @@ setup(
     version=metadata["__extension_version__"],
     author="TKET development team",
     author_email="tket-support@cambridgequantum.com",
-    python_requires=">=3.8",
+    python_requires=">=3.9",
     project_urls={
         "Documentation": "https://cqcl.github.io/pytket-pysimplex/api/index.html",
         "Source": "https://github.com/CQCL/pytket-pysimplex",
@@ -43,10 +43,9 @@ setup(
     license="Apache 2",
     packages=find_namespace_packages(include=["pytket.*"]),
     include_package_data=True,
-    install_requires=["pytket ~= 1.9", "pysimplex ~= 1.4"],
+    install_requires=["pytket ~= 1.16", "pysimplex ~= 1.4"],
     classifiers=[
         "Environment :: Console",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",

@@ -61,7 +61,7 @@ _gateset = {
 def _int_double(x: float) -> int:
     # return (2x) mod 8 if x is close to a half-integer, otherwise error
     y = 2 * x
-    n = int(np.round(y))  # type: ignore
+    n = int(np.round(y))
     if np.isclose(y, n):
         return n % 8
     else:

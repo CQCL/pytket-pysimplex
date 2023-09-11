@@ -25,8 +25,8 @@ from pytket.backends import (
 )
 from pytket.backends.backendresult import BackendResult
 from pytket.backends.resulthandle import _ResultIdTuple
-from pytket.circuit import Circuit, OpType  # type: ignore
-from pytket.passes import (  # type: ignore
+from pytket.circuit import Circuit, OpType
+from pytket.passes import (
     BasePass,
     DecomposeBoxes,
     FlattenRegisters,
@@ -34,12 +34,13 @@ from pytket.passes import (  # type: ignore
     RemoveRedundancies,
     SequencePass,
 )
-from pytket.predicates import (  # type: ignore
+from pytket.predicates import (
     DefaultRegisterPredicate,
     GateSetPredicate,
     NoClassicalControlPredicate,
     Predicate,
 )
+from pytket.unit_id import Bit, Qubit
 from pytket.utils.outcomearray import OutcomeArray
 from pytket.utils.results import KwargTypes
 
@@ -60,7 +61,7 @@ _gateset = {
 def _int_double(x: float) -> int:
     # return (2x) mod 8 if x is close to a half-integer, otherwise error
     y = 2 * x
-    n = int(np.round(y))  # type: ignore
+    n = int(np.round(y))
     if np.isclose(y, n):
         return n % 8
     else:
@@ -108,11 +109,13 @@ def _process_one_circuit(circ: Circuit, n_shots: int) -> BackendResult:
             args = cmd.args
             if optype == OpType.Measure:
                 qarg, carg = args
+                assert isinstance(qarg, Qubit)
+                assert isinstance(carg, Bit)
                 qb = qubits.index(qarg)
                 cb = bits.index(carg)
                 measurements[cb] = S.MeasZ(qb)
             else:
-                qbs = [qubits.index(arg) for arg in args]
+                qbs = [qubits.index(cast(Qubit, arg)) for arg in args]
                 if optype == OpType.X:
                     S.X(*qbs)
                 elif optype == OpType.Y:
@@ -154,7 +157,7 @@ class SimplexBackend(Backend):
         ]
 
     def rebase_pass(self) -> BasePass:
-        return RebaseCustom(_gateset, Circuit(), _tk1_to_cliff)
+        return RebaseCustom(_gateset, Circuit(), _tk1_to_cliff)  # type: ignore
 
     def default_compilation_pass(self, optimisation_level: int = 1) -> BasePass:
         # No optimization.

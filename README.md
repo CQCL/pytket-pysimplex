@@ -11,7 +11,9 @@ be simulated using pysimplex.
 `pytket-pysimplex` is available for Python 3.9 and 3.10, on Linux, MacOS
 and Windows. To install, run:
 
-```pip install pytket-pysimplex```
+```shell
+pip install pytket-pysimplex
+```
 
 This will install `pytket` if it isn't already installed, and add new classes
 and methods into the `pytket.extensions` namespace.

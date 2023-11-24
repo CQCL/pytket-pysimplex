@@ -1,12 +1,7 @@
-# Pytket Extensions
-
-This repository contains the pytket-pysimplex extension, using Quantinuum's
-[pytket](https://cqcl.github.io/tket/pytket/api/index.html) quantum SDK.
-
 # pytket-pysimplex
 
-[Pytket](https://cqcl.github.io/tket/pytket/api/index.html) is a python module for interfacing
-with tket, a quantum computing toolkit and optimisation compiler developed by Quantinuum.
+[Pytket](https://tket.quantinuum.com/api-docs/index.html) is a python module for interfacing
+with tket, a quantum computing toolkit and optimising compiler developed by Quantinuum.
 
 `pytket-pysimplex` is an extension to `pytket` that allows `pytket` circuits to
 be simulated using pysimplex.
@@ -16,7 +11,9 @@ be simulated using pysimplex.
 `pytket-pysimplex` is available for Python 3.9 and 3.10, on Linux, MacOS
 and Windows. To install, run:
 
-```pip install pytket-pysimplex```
+```shell
+pip install pytket-pysimplex
+```
 
 This will install `pytket` if it isn't already installed, and add new classes
 and methods into the `pytket.extensions` namespace.

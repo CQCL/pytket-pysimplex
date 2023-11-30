@@ -63,7 +63,6 @@ _backend_info = BackendInfo(
     None,
     __extension_version__,
     None,
-    None,
     _gateset,
 )
 

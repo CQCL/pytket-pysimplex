@@ -23,6 +23,7 @@ from pytket.backends import (
     ResultHandle,
     StatusEnum,
 )
+from pytket.backends.backendinfo import BackendInfo
 from pytket.backends.backendresult import BackendResult
 from pytket.backends.resulthandle import _ResultIdTuple
 from pytket.circuit import Circuit, OpType
@@ -43,6 +44,7 @@ from pytket.predicates import (
 from pytket.unit_id import Bit, Qubit
 from pytket.utils.outcomearray import OutcomeArray
 from pytket.utils.results import KwargTypes
+from pytket.extensions.pysimplex._metadata import __extension_version__
 
 _gateset = {
     OpType.X,
@@ -56,6 +58,14 @@ _gateset = {
     OpType.Reset,
     OpType.Measure,
 }
+_backend_info = BackendInfo(
+    "SimplexBackend",
+    None,
+    __extension_version__,
+    None,
+    None,
+    _gateset,
+)
 
 
 def _int_double(x: float) -> int:
@@ -173,6 +183,10 @@ class SimplexBackend(Backend):
     @property
     def _result_id_type(self) -> _ResultIdTuple:
         return (str,)
+
+    @property
+    def backend_info(self) -> Optional[BackendInfo]:
+        return _backend_info
 
     def process_circuits(
         self,

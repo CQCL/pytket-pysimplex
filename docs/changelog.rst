@@ -1,6 +1,12 @@
 Changelog
 ~~~~~~~~~
 
+0.12.0 (January 2024)
+---------------------
+
+* Updated pytket version requirement to 1.23.
+* Implement ``backend_info`` property.
+
 0.11.0 (November 2023)
 ----------------------
 

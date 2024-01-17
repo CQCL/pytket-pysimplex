@@ -7,7 +7,8 @@ Unreleased
 General:
 
 * Python 3.12 support added, 3.9 dropped.
-* pytket dependency updated to 1.24
+* pytket dependency updated to 1.24.
+* pysimplex dependency updated to 1.5.
 
 0.12.0 (January 2024)
 ---------------------

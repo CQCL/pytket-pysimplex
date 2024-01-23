@@ -1,6 +1,13 @@
 Changelog
 ~~~~~~~~~
 
+0.13.0 (January 2024)
+---------------------
+
+* Updated pytket version requirement to 1.24.
+* Python 3.12 support added, 3.9 dropped.
+* pysimplex dependency updated to 1.5.
+
 0.12.0 (January 2024)
 ---------------------
 

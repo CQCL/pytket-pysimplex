@@ -6,6 +6,9 @@ with tket, a quantum computing toolkit and optimising compiler developed by Quan
 `pytket-pysimplex` is an extension to `pytket` that allows `pytket` circuits to
 be simulated using pysimplex.
 
+Some useful links:
+- [API Documentation](https://tket.quantinuum.com/extensions/pytket-pysimplex/)
+
 ## Getting started
 
 `pytket-pysimplex` is available for Python 3.10, 3.11 and 3.12, on Linux, MacOS

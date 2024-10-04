@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from collections.abc import Sequence
-from typing import List, Optional, Union, cast
+from typing import Optional, Union, cast
 from uuid import uuid4
 
 import numpy as np
@@ -161,7 +161,7 @@ class SimplexBackend(Backend):
     _supports_counts = True
 
     @property
-    def required_predicates(self) -> List[Predicate]:
+    def required_predicates(self) -> list[Predicate]:
         return [
             DefaultRegisterPredicate(),
             GateSetPredicate(_gateset),
@@ -196,11 +196,11 @@ class SimplexBackend(Backend):
         n_shots: Optional[Union[int, Sequence[int]]] = None,
         valid_check: bool = True,
         **kwargs: KwargTypes,
-    ) -> List[ResultHandle]:
+    ) -> list[ResultHandle]:
         circuits = list(circuits)
-        n_shots_list: List[int] = []
+        n_shots_list: list[int] = []
         if hasattr(n_shots, "__iter__"):
-            n_shots_list = cast(List[int], n_shots)
+            n_shots_list = cast(list[int], n_shots)
             if len(n_shots_list) != len(circuits):
                 raise ValueError("The length of n_shots and circuits must match")
         else:

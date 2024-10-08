@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import cast, List, Optional, Sequence, Union
+from collections.abc import Sequence
+from typing import Optional, Union, cast
 from uuid import uuid4
+
 import numpy as np
+
 from pysimplex import Simplex  # type: ignore
 from pytket.backends import (
     Backend,
@@ -27,6 +30,7 @@ from pytket.backends.backendinfo import BackendInfo
 from pytket.backends.backendresult import BackendResult
 from pytket.backends.resulthandle import _ResultIdTuple
 from pytket.circuit import Circuit, OpType
+from pytket.extensions.pysimplex._metadata import __extension_version__
 from pytket.passes import (
     BasePass,
     DecomposeBoxes,
@@ -44,7 +48,6 @@ from pytket.predicates import (
 from pytket.unit_id import Bit, Qubit
 from pytket.utils.outcomearray import OutcomeArray
 from pytket.utils.results import KwargTypes
-from pytket.extensions.pysimplex._metadata import __extension_version__
 
 _gateset = {
     OpType.X,
@@ -158,7 +161,7 @@ class SimplexBackend(Backend):
     _supports_counts = True
 
     @property
-    def required_predicates(self) -> List[Predicate]:
+    def required_predicates(self) -> list[Predicate]:
         return [
             DefaultRegisterPredicate(),
             GateSetPredicate(_gateset),
@@ -193,11 +196,11 @@ class SimplexBackend(Backend):
         n_shots: Optional[Union[int, Sequence[int]]] = None,
         valid_check: bool = True,
         **kwargs: KwargTypes,
-    ) -> List[ResultHandle]:
+    ) -> list[ResultHandle]:
         circuits = list(circuits)
-        n_shots_list: List[int] = []
+        n_shots_list: list[int] = []
         if hasattr(n_shots, "__iter__"):
-            n_shots_list = cast(List[int], n_shots)
+            n_shots_list = cast(list[int], n_shots)
             if len(n_shots_list) != len(circuits):
                 raise ValueError("The length of n_shots and circuits must match")
         else:

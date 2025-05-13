@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from collections.abc import Sequence
-from typing import Optional, Union, cast
+from typing import cast
 from uuid import uuid4
 
 import numpy as np
@@ -76,8 +76,7 @@ def _int_double(x: float) -> int:
     n = int(np.round(y))
     if np.isclose(y, n):
         return n % 8
-    else:
-        raise ValueError("Non-Clifford angle encountered")
+    raise ValueError("Non-Clifford angle encountered")
 
 
 def _tk1_to_cliff(a: float, b: float, c: float) -> Circuit:
@@ -86,27 +85,27 @@ def _tk1_to_cliff(a: float, b: float, c: float) -> Circuit:
     circ = Circuit(1)
     if n_c == 1:
         circ.S(0)
-    elif n_c == 2:
+    elif n_c == 2:  # noqa: PLR2004
         circ.Z(0)
-    elif n_c == 3:
+    elif n_c == 3:  # noqa: PLR2004
         circ.Sdg(0)
     if n_b == 1:
         circ.H(0).S(0).H(0)
-    elif n_b == 2:
+    elif n_b == 2:  # noqa: PLR2004
         circ.H(0).Z(0).H(0)
-    elif n_b == 3:
+    elif n_b == 3:  # noqa: PLR2004
         circ.H(0).Sdg(0).H(0)
     if n_a == 1:
         circ.S(0)
-    elif n_a == 2:
+    elif n_a == 2:  # noqa: PLR2004
         circ.Z(0)
-    elif n_a == 3:
+    elif n_a == 3:  # noqa: PLR2004
         circ.Sdg(0)
     circ.add_phase(-0.25 * (n_a + n_b + n_c))
     return circ
 
 
-def _process_one_circuit(circ: Circuit, n_shots: int) -> BackendResult:
+def _process_one_circuit(circ: Circuit, n_shots: int) -> BackendResult:  # noqa: PLR0912
     n_qubits = circ.n_qubits
     qubits = circ.qubits
     bits = circ.bits
@@ -127,7 +126,7 @@ def _process_one_circuit(circ: Circuit, n_shots: int) -> BackendResult:
                 cb = bits.index(carg)
                 measurements[cb] = S.MeasZ(qb)
             else:
-                qbs = [qubits.index(cast(Qubit, arg)) for arg in args]
+                qbs = [qubits.index(cast("Qubit", arg)) for arg in args]
                 if optype == OpType.X:
                     S.X(*qbs)
                 elif optype == OpType.Y:
@@ -187,31 +186,31 @@ class SimplexBackend(Backend):
         return (str,)
 
     @property
-    def backend_info(self) -> Optional[BackendInfo]:
+    def backend_info(self) -> BackendInfo | None:
         return _backend_info
 
     def process_circuits(
         self,
         circuits: Sequence[Circuit],
-        n_shots: Optional[Union[int, Sequence[int]]] = None,
+        n_shots: int | Sequence[int] | None = None,
         valid_check: bool = True,
         **kwargs: KwargTypes,
     ) -> list[ResultHandle]:
         circuits = list(circuits)
         n_shots_list: list[int] = []
         if hasattr(n_shots, "__iter__"):
-            n_shots_list = cast(list[int], n_shots)
+            n_shots_list = cast("list[int]", n_shots)
             if len(n_shots_list) != len(circuits):
                 raise ValueError("The length of n_shots and circuits must match")
         else:
             # convert n_shots to a list
-            n_shots_list = [cast(int, n_shots)] * len(circuits)
+            n_shots_list = [cast("int", n_shots)] * len(circuits)
 
         if valid_check:
             self._check_all_circuits(circuits)
 
         handle_list = []
-        for circuit, n_shots_circ in zip(circuits, n_shots_list):
+        for circuit, n_shots_circ in zip(circuits, n_shots_list, strict=False):
             handle = ResultHandle(str(uuid4()))
             self._cache[handle] = {
                 "result": _process_one_circuit(circuit, n_shots_circ)

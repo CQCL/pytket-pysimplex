@@ -12,6 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Backend for utilizing the pysimplex Clifford simulator directly from pytket"""
-
 from .simplex_backend import SimplexBackend

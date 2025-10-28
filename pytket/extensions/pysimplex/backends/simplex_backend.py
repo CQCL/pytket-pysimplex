@@ -17,8 +17,6 @@ from typing import cast
 from uuid import uuid4
 
 import numpy as np
-
-from pysimplex import Simplex  # type: ignore
 from pytket.backends import (
     Backend,
     CircuitNotRunError,
@@ -48,6 +46,8 @@ from pytket.predicates import (
 from pytket.unit_id import Bit, Qubit
 from pytket.utils.outcomearray import OutcomeArray
 from pytket.utils.results import KwargTypes
+
+from pysimplex import Simplex  # type: ignore
 
 _gateset = {
     OpType.X,
